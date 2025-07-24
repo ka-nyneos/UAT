@@ -10,6 +10,48 @@ const FinancialDashboard = () => {
  const [payablesData, setPayablesData] = useState<CurrencyData[]>([]);
 const [receivablesData, setReceivablesData] = useState<CurrencyData[]>([]);
 
+// Function to parse formatted currency string back to number (only for calculations)
+const parseCurrencyString = (currencyStr: string): number => {
+  if (!currencyStr || typeof currencyStr !== 'string') return 0;
+  
+  // Remove $ symbol and get the numeric part
+  const cleanStr = currencyStr.replace('$', '').trim();
+  
+  // Handle negative values
+  const isNegative = cleanStr.startsWith('-');
+  const positiveStr = cleanStr.replace('-', '');
+  
+  // Parse based on suffix
+  let value = 0;
+  if (positiveStr.endsWith('K')) {
+    value = parseFloat(positiveStr.replace('K', '')) * 1000;
+  } else if (positiveStr.endsWith('M')) {
+    value = parseFloat(positiveStr.replace('M', '')) * 1000000;
+  } else {
+    value = parseFloat(positiveStr) || 0;
+  }
+  
+  return isNegative ? -value : value;
+};
+
+// Function to format numbers with K, M prefixes
+const formatCurrency = (amount: number): string => {
+  const absAmount = Math.abs(amount);
+  const sign = amount < 0 ? '-' : '';
+  
+  if (absAmount >= 1000000) {
+    return `${sign}$${(absAmount / 1000000).toFixed(1)}M`;
+  } else if (absAmount >= 1000) {
+    return `${sign}$${(absAmount / 1000).toFixed(1)}K`;
+  } else {
+    return `${sign}$${absAmount.toFixed(0)}`;
+  }
+};
+
+// Calculate totals by parsing the formatted strings
+const totalPayables = payablesData.reduce((sum, item) => sum + parseCurrencyString(item.amount), 0);
+const totalReceivables = receivablesData.reduce((sum, item) => sum + parseCurrencyString(item.amount), 0);
+
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -86,16 +128,16 @@ const forwardsData = [
               <CreditCard className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <span className="text-secondary-text-dark text-sm font-medium">Total Payables</span>
+              <span className="text-slate-600 text-sm font-medium">Total Payables</span>
               <div className="text-xs text-primary">Outstanding liabilities</div>
             </div>
           </div>
-          <div className="text-2xl font-bold text-secondary-text-dark text-center py-2 px-4 rounded-lg">$187.4M</div>
+          <div className="text-2xl font-bold text-slate-600 text-center py-2 px-4 rounded-lg">{formatCurrency(totalPayables)}</div>
           <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
             <div className="space-y-1">
               {payablesData.map((item, _) => (
                 <div key={item.currency} className="flex justify-between items-center py-2 px-3 bg-white/70 rounded-lg hover:bg-white/50 transition-colors shadow-sm">
-                  <span className="text-secondary-text-dark text-sm font-medium flex items-center">
+                  <span className="text-slate-600 text-sm font-medium flex items-center">
                     <span className="w-2 h-2 bg-primary-lg rounded-full mr-2"></span>
                     {item.currency}
                   </span>
@@ -134,7 +176,7 @@ const forwardsData = [
               <div className="text-xs text-green-700">Expected income</div>
             </div>
           </div>
-          <div className="text-2xl font-bold text-secondary-text-dark text-center py-2 px-4 rounded-lg ">$204.2M</div>
+          <div className="text-2xl font-bold text-slate-600 text-center py-2 px-4 rounded-lg ">{formatCurrency(totalReceivables)}</div>
           <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
             <div className="space-y-1">
               {receivablesData.map((item, _) => (

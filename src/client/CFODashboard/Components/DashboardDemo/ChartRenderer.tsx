@@ -61,7 +61,7 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
     return (
       <ul className="flex justify-center gap-4 mt-4">
         {payload.map((entry: any, index: number) => (
-          <li key={`item-${index}`} className="text-black text-sm flex items-center">
+          <li key={`item-${index}`} className="text-secondary-text-dark text-sm flex items-center">
             <span
               className="inline-block w-3 h-3 rounded-full mr-2"
               style={{ backgroundColor: entry.color }}
@@ -80,8 +80,8 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
         return (
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
+            <XAxis dataKey="month" tick={{ fill: '#129990CC' }} />
+            <YAxis tick={{ fill: '#129990CC' }} />
             <Tooltip />
             <Legend />
             <Line type="monotone" dataKey={metric} stroke="#129990" />
@@ -92,8 +92,8 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
         return (
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
+            <XAxis dataKey="month" tick={{ fill: '#129990CC' }} />
+            <YAxis tick={{ fill: '#129990CC' }} />
             <Tooltip />
             <Legend />
             <Bar dataKey={metric} fill="#129990B3" />
@@ -104,8 +104,8 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
         return (
           <AreaChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
+            <XAxis dataKey="month" tick={{ fill: '#129990CC' }} />
+            <YAxis tick={{ fill: '#129990CC' }} />
             <Tooltip />
             <Legend />
             <Area type="monotone" dataKey={metric} stroke="#129990" fill="#129990B3" />
@@ -138,8 +138,8 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
       case 'scatter':
         return (
           <ScatterChart>
-            <XAxis type="number" dataKey="x" name="Index" />
-            <YAxis type="number" dataKey="y" name={metric} />
+            <XAxis type="number" dataKey="x" name="Index" tick={{ fill: '#129990CC' }} />
+            <YAxis type="number" dataKey="y" name={metric} tick={{ fill: '#129990CC' }} />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
             <Scatter name={metric} data={scatterData} fill="#129990" />
           </ScatterChart>
@@ -161,8 +161,8 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
       case 'funnel':
         return (
           <BarChart data={funnelData} layout="vertical">
-            <XAxis type="number" />
-            <YAxis type="category" dataKey="name" />
+            <XAxis type="number" tick={{ fill: '#129990CC' }} />
+            <YAxis type="category" dataKey="name" tick={{ fill: '#129990CC' }} />
             <Tooltip />
             <Legend />
             <Bar dataKey="value" fill="#129990B3" />
@@ -191,7 +191,7 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
             <RadialBar
               dataKey="value"
               fill="#129990B3"
-              label={{ position: 'insideStart', fill: '#000000' }}
+              label={{ position: 'insideStart', fill: '#ffffff' }}
             />
             <RLegend
               iconSize={10}
@@ -208,7 +208,7 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
 
       default:
         return (
-          <div className="text-gray-600 text-center p-8">
+          <div className="text-secondary-text text-center p-8">
             The chart type <strong>{chartType}</strong> is not yet implemented.
           </div>
         );
@@ -216,7 +216,7 @@ const ChartRenderer: React.FC<ChartRendererProps> = ({ chartType, data, metric }
   };
 
   return (
-    <div className="h-[417px] bg-gray-100 p-4 rounded-lg">
+    <div className="h-[417px] bg-secondary-color-dark border border-border p-4 rounded-lg">
       <ResponsiveContainer width="100%" height="100%">
         {renderChart()}
       </ResponsiveContainer>

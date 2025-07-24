@@ -151,14 +151,14 @@ const ChartCanvas: React.FC<ChartCanvasProps> = ({
   };
 
   return (
-    <div className="bg-white border border-gray-300 rounded-xl p-4 min-h-[600px]">
+    <div className="bg-secondary-color-lt border-2 border-border rounded-xl p-4 min-h-[600px]">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold text-gray-800">
+        <h3 className="text-lg font-semibold text-secondary-text-dark">
           📊 Chart Canvas ({charts.length} chart{charts.length !== 1 ? 's' : ''})
         </h3>
         <button 
           onClick={handleDownload}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors flex items-center gap-2"
+          className="px-4 py-2 bg-primary-lt text-white rounded hover:bg-primary transition-colors flex items-center gap-2"
           aria-label="Download dashboard as PNG"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,12 +169,12 @@ const ChartCanvas: React.FC<ChartCanvasProps> = ({
       </div>
 
       {charts.length === 0 ? (
-        <div className="flex items-center justify-center min-h-[500px] h-full border-2 border-dashed border-gray-300 rounded-lg">
-          <div className="text-center text-gray-500">
-            <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="flex bg-white/65 items-center justify-center min-h-[500px] h-full border-2 border-dashed border-primary-lt rounded-lg">
+          <div className="text-center text-primary">
+            <svg className="mx-auto h-12 w-12 text-primary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            <p className="text-lg font-medium">No charts yet</p>
+            <p className="text-lg font-medium ">No charts yet</p>
             <p className="mt-2">Click "Add Chart" to create your first chart</p>
           </div>
         </div>

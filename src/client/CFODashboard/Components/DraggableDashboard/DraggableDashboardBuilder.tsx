@@ -85,14 +85,14 @@ const DraggableDashboardBuilder = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="bg-secondary-color-lt">
       {/* Header */}
-      <div className="bg-white border-y border-gray-300 shadow-sm">
+      <div className="bg-secondary-color-lt border-y border-primary shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Dashboard Builder</h1>
-              <p className="text-sm text-gray-600 mt-1">
+              <h1 className="text-2xl font-bold text-secondary-text">Dashboard Builder</h1>
+              <p className="text-sm text-secondary-text-dark mt-1">
                 Create interactive charts and build custom dashboards
               </p>
             </div>
@@ -115,8 +115,8 @@ const DraggableDashboardBuilder = () => {
                 onClick={() => setShowPreview(prev => !prev)}
                 className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all ${
                   showPreview 
-                    ? 'bg-green-100 text-green-700 border border-green-300' 
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    ? 'bg-primary-lt text-white ' 
+                    : 'bg-secondary-color-lt text-secondary-text border border-border hover:bg-primary-xl'
                 }`}
               >
                 <Settings size={18} />
@@ -133,17 +133,17 @@ const DraggableDashboardBuilder = () => {
 
               {charts.length > 0 && (
                 <>
-                  <button
+                  {/* <button
                     onClick={handleDownload}
                     className="px-4 py-2 bg-purple-600 text-white rounded-lg flex items-center gap-2 hover:bg-purple-700 transition-colors"
                   >
                     <Download size={18} />
                     Export
-                  </button>
+                  </button> */}
 
                   <button
                     onClick={handleReset}
-                    className="px-4 py-2 bg-red-600 text-white rounded-lg flex items-center gap-2 hover:bg-red-700 transition-colors"
+                    className="px-4 py-2 bg-red-color text-white rounded-lg flex items-center gap-2 hover:bg-red-700 transition-colors"
                   >
                     <Trash2 size={18} />
                     Clear All
@@ -159,8 +159,8 @@ const DraggableDashboardBuilder = () => {
       <div className="mx-auto py-6">
         {/* Filters Panel */}
         {showFilters && (
-          <div className="mb-6 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Data Filters</h3>
+          <div className="mb-6 bg-secondary-color-lt rounded-lg shadow-sm border border-border p-4">
+            <h3 className="text-lg font-semibold text-secondary-text mb-4">Data Filters</h3>
             <InputPanel
               selectedMetric={selectedMetric}
               setSelectedMetric={setSelectedMetric}
@@ -183,9 +183,9 @@ const DraggableDashboardBuilder = () => {
 
         {/* Chart Preview Section */}
         {showPreview && (
-          <div className="mb-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Chart Preview</h3>
-            <p className="text-sm text-gray-600 mb-4">
+          <div className="mb-6 bg-secondary-color-lt rounded-lg shadow-sm border border-border p-6">
+            <h3 className="text-lg font-semibold text-secondary-text-dark mb-4">Chart Preview</h3>
+            <p className="text-sm text-secondary-text-dark mb-4">
               Preview different chart types with your current data filters before adding to dashboard
             </p>
             
@@ -206,7 +206,7 @@ const DraggableDashboardBuilder = () => {
         )}
 
         {/* Dashboard Canvas */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-secondary-color-lt rounded-lg shadow-sm border border-primary p-6">
           <ChartCanvas
             charts={charts}
             onLayoutChange={updateLayout}

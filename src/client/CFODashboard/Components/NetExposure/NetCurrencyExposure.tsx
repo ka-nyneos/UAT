@@ -4,12 +4,48 @@ import React, { useState, useEffect } from "react";
 
 interface CurrencyExposure {
   currency: string;
-  amount: number;
+  amount: string; 
 }
 const CurrencyExposure = () => {
    const [currencyData, setCurrencyData] = useState<CurrencyExposure[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const parseCurrencyString = (currencyStr: string): number => {
+    if (!currencyStr || typeof currencyStr !== 'string') return 0;
+    
+    const cleanStr = currencyStr.replace('$', '').trim();
+    
+    const isNegative = cleanStr.startsWith('-');
+    const positiveStr = cleanStr.replace('-', '');
+    
+    let value = 0;
+    if (positiveStr.endsWith('K')) {
+      value = parseFloat(positiveStr.replace('K', '')) * 1000;
+    } else if (positiveStr.endsWith('M')) {
+      value = parseFloat(positiveStr.replace('M', '')) * 1000000;
+    } else {
+      value = parseFloat(positiveStr) || 0;
+    }
+    
+    return isNegative ? -value : value;
+  };
+
+  
+  const formatCurrency = (amount: number): string => {
+    const absAmount = Math.abs(amount);
+    const sign = amount < 0 ? '-' : '';
+    
+    if (absAmount >= 1000000) {
+      return `${sign}$${(absAmount / 1000000).toFixed(1)}M`;
+    } else if (absAmount >= 1000) {
+      return `${sign}$${(absAmount / 1000).toFixed(1)}K`;
+    } else {
+      return `${sign}$${absAmount.toFixed(0)}`;
+    }
+  };
+
+  const totalNetExposure = currencyData.reduce((sum, currency) => sum + parseCurrencyString(currency.amount), 0);
 
   useEffect(() => {
     const fetchCurrencyData = async () => {
@@ -41,7 +77,6 @@ const CurrencyExposure = () => {
     className="w-full h-full bg-gradient-to-br from-[#129990E6] to-teal-500 rounded-xl shadow-lg p-4 text-white relative overflow-hidden
       transition duration-200 ease-in-out
       hover:shadow-lg hover:scale-[1] hover:bg-opacity-90">
-      {/* Grid Background */}
       <div className="absolute inset-0 opacity-10">
         <svg
           className="w-full h-full"
@@ -78,7 +113,7 @@ const CurrencyExposure = () => {
           </div>
           <div>
             <h2 className="text-lg font-semibold text-white">Currency Exposure</h2>
-            <p className="text-secondary-color text-xs">Net exposure & Hedging</p>
+            <p className="text-secondary-text-dark text-xs">Net exposure & Hedging</p>
           </div>
         </div>
 
@@ -94,7 +129,7 @@ const CurrencyExposure = () => {
                     <span className="text-base font-bold text-white">{currency.currency}</span>
                   </div>
                   <span className={`text-sm font-semibold ${
-                    currency.amount<0 ? 'text-gray-50' : 'text-white'
+                    parseCurrencyString(currency.amount) < 0 ? 'text-gray-50' : 'text-white'
                   }`}>
                     {currency.amount}
                   </span>
@@ -114,12 +149,12 @@ const CurrencyExposure = () => {
         <div>
           <div className="mt-5 p-3 items-end bg-white/30 backdrop-blur-sm rounded-lg border border-white/10">
             <div className="flex justify-between items-center text-xs">
-              <span className="text-secondary-color">Total Net Exposure</span>
-              <span className="text-white font-medium">$17.4M</span>
+              <span className="text-secondary-text">Total Net Exposure</span>
+              <span className="text-white font-medium">{formatCurrency(totalNetExposure)}</span>
             </div>
             <div className="flex justify-between items-center text-xs mt-1">
-              <span className="text-secondary-color">Avg Hedge Ratio</span>
-              <span className="text-white font-medium">67.75%</span>
+              <span className="text-secondary-text">Avg Hedge Ratio</span>
+              <span className="text-white font-medium">0%</span>
             </div>
           </div>
         </div>

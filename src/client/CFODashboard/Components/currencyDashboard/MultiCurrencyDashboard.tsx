@@ -110,7 +110,7 @@ const TotalBalance: React.FC<TotalBalanceProps> = ({
           <TrendingUp className="w-4 h-4 text-green-200" />
         </div>
       </div>
-      <p className="text-secondary-color text-sm relative top-4">
+      <p className="text-secondary-text text-sm relative top-4">
         Converted to {baseCurrency} • Last updated: Now
       </p>
     </div>
@@ -172,7 +172,7 @@ const CurrencyAccountItem: React.FC<CurrencyAccountItemProps> = ({
 
   return (
     <div
-      className="flex items-center text-gray-800 bg-white justify-between p-3 hover:bg-primary-lg rounded-lg transition-colors relative border-b border-gray-200 border-opacity-5 last:border-b-0"
+      className="flex items-center text-secondary-text-dark bg-secondary-color-lt justify-between p-3 hover:bg-primary-lt rounded-lg transition-colors relative border-b border-border-secondary border-opacity-5 last:border-b-0"
       style={{ minHeight: '60px' }}
     >
       <div className="flex items-center gap-3 relative z-10">
@@ -181,15 +181,15 @@ const CurrencyAccountItem: React.FC<CurrencyAccountItemProps> = ({
           {getCurrencyIcon(account.currency)}
           <span className="font-medium ">{account.currency}</span>
         </div>
-        <span className="text-blue-400 ">
+        <span className="text-primary-lt font-semibold">
           {formatCurrency(account.amount, account.currency)}
         </span>
       </div>
       <div className="text-right relative z-10 ">
-        <div className="text-sm text-blue-400">
+        <div className="text-sm text-primary-lt font-semibold">
           {formatCurrency(convertedAmount, baseCurrency)}
         </div>
-        <div className="text-xs text-blue-400">
+        <div className="text-xs text-primary-lt font-semibold">
           {percentage}%
         </div>
       </div>
@@ -213,10 +213,10 @@ const CurrencyAccountsList: React.FC<CurrencyAccountsListProps> = ({
 }) => {
   return (
     <div className="relative z-10 mb-4">
-      <div className="bg-white rounded-xl p-4 backdrop-blur-sm relative overflow-hidden">
+      <div className="bg-secondary-color-lt rounded-xl p-4 backdrop-blur-sm relative overflow-hidden">
         <div className="flex justify-between items-center mb-3 relative z-10">
-          <h3 className="text-sm font-medium text-blue-500">Currency Breakdown</h3>
-          <span className="text-xs text-blue-600 font-mono">{accounts.length} currencies</span>
+          <h3 className="text-sm font-medium text-primary">Currency Breakdown</h3>
+          <span className="text-xs text-primary font-mono">{accounts.length} currencies</span>
         </div>
 
         <div
@@ -286,7 +286,7 @@ const MultiCurrencyDashboard: React.FC = () => {
       <div className="flex justify-between items-start mx-2 mb-6 relative z-10">
         <div className="flex flex-col items-start">
           <h2 className="text-xl font-semibold">Total Company Assets</h2>
-          <p className="text-secondary-color-lt text-sm mt-1">Multi-Currency Portfolio</p>
+          <p className="text-secondary-text text-sm mt-1">Multi-Currency Portfolio</p>
         </div>
         <div className="flex items-center gap-2">
           <select

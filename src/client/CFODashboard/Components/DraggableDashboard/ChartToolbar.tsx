@@ -59,12 +59,12 @@ const ChartToolbar: React.FC<ChartToolbarProps> = ({ activeChart, setActiveChart
             key={id}
             onClick={() => isSuitable && setActiveChart(id)}
             disabled={!isSuitable}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md border transition ${
+            className={`flex items-center gap-2 border-primary-lg px-4 py-2 rounded-md border transition ${
               isActive
-                ? 'bg-primary border-primary text-white '
+                ? 'bg-primary-lt text-white '
                 : isSuitable
-                ? 'bg-primary-lg text-gray-600 border-primary hover:bg-primary-lt hover:text-white'
-                : 'bg-primary-xl text-gray-400 opacity-50 cursor-not-allowed'
+                ? 'bg-primary-xl text-secondary-text-dark hover:bg-primary-lt hover:text-white'
+                : 'bg-gray-100 text-gray-400 opacity-50 cursor-not-allowed'
             }`}
           >
             <Icon size={18} /> {label}

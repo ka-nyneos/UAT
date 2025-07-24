@@ -3,14 +3,14 @@ import { TrendingUp, DollarSign, Building2 } from "lucide-react";
 
 const RecentTradingActivityCard: React.FC = () => {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-gradient-to-tr from-[#0A9340] via-[#6cb98b] to-[#9BD598] rounded-2xl border border-primary p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
           <TrendingUp className="w-5 h-5 text-green-600" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">Recent Trading Activity</h3>
-          <p className="text-sm text-gray-500">Last 7 Days Summary</p>
+          <h3 className="text-lg font-semibold text-secondary-text-dark">Recent Trading Activity</h3>
+          <p className="text-sm text-secondary-text-dark">Last 7 Days Summary</p>
         </div>
       </div>
 
@@ -24,23 +24,23 @@ const RecentTradingActivityCard: React.FC = () => {
                 {
                   label: "Total Trades",
                   value: "150",
-                  icon: <span className="text-xs font-bold text-slate-700">T</span>,
+                  icon: <span className="text-xs font-bold text-secondary-text-dark">T</span>,
                 },
                 {
                   label: "Total Volume",
                   value: "$312.8M",
-                  icon: <DollarSign className="w-4 h-4 text-slate-600" />,
+                  icon: <DollarSign className="w-4 h-4 text-secondary-text-dark" />,
                 },
               ].map((stat, idx) => (
                 <div
                   key={idx}
-                  className="bg-gradient-to-br from-slate-50 to-slate-100 p-4 rounded-xl border border-primary-lg"
+                  className="bg-gradient-to-br from-secondary-color-lt to-secondary-color-dark p-4 rounded-xl border border-secondary-text shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-6 h-6 bg-primary-lg border border-primary-lt rounded-full flex items-center justify-center">
                       {stat.icon}
                     </div>
-                    <p className="text-xs text-slate-600 font-medium">{stat.label}</p>
+                    <p className="text-xs text-secondary-text-dark font-medium">{stat.label}</p>
                   </div>
                   <p className="text-xl font-bold text-primary">{stat.value}</p>
                 </div>
@@ -50,12 +50,12 @@ const RecentTradingActivityCard: React.FC = () => {
             {/* Bottom Row - Centered card */}
             <div className="flex justify-center">
               <div className="w-1/2">
-                <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-4 rounded-xl border border-primary-lg">
+                <div className="bg-gradient-to-br from-secondary-color-lt to-secondary-color-dark p-4 rounded-xl border border-secondary-text">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-6 h-6 bg-primary-lg border border-primary-lt rounded-full flex items-center justify-center">
-                      <span className="text-xs font-bold text-slate-700">A</span>
+                      <span className="text-xs font-bold text-secondary-text-dark">A</span>
                     </div>
-                    <p className="text-xs text-slate-600 font-medium">Avg Trade Size</p>
+                    <p className="text-xs text-secondary-text-dark font-medium">Avg Trade Size</p>
                   </div>
                   <p className="text-xl font-bold text-primary">$6.7M</p>
                 </div>
@@ -118,7 +118,7 @@ const RecentTradingActivityCard: React.FC = () => {
                     <p className={`text-xs ${trade.subtext}`}>{trade.bank}</p>
                   </div>
                 </div>
-                <p className="text-lg font-bold text-[#393e46e7]">{trade.amount}</p>
+                <p className="text-lg font-bold text-slate-600">{trade.amount}</p>
               </div>
             ))}
           </div>

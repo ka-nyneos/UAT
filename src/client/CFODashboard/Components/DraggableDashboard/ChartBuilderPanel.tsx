@@ -120,14 +120,14 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
   };
 
   return (
-    <div className="w-[380px] bg-white h-full shadow-xl flex flex-col border-l border-gray-200">
+    <div className="w-[380px] bg-secondary-color-lt h-full shadow-xl flex flex-col border-l border-primary">
       {/* Header */}
-      <div className="p-4 border-b border-gray-200 bg-gray-50">
+      <div className="p-4 border-b border-primary bg-secondary-color">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-800">Add New Chart</h2>
+          <h2 className="text-lg font-semibold text-primary">Add New Chart</h2>
           <button
             onClick={handleClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-secondary-text-dark hover:text-primary transition-colors"
             aria-label="Close panel"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,13 +141,13 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
         {/* Chart Type Selection */}
         <div>
-          <label className="text-sm font-medium block text-gray-700 mb-2">Chart Type</label>
+          <label className="text-sm font-medium block text-secondary-text-dark mb-2">Chart Type</label>
           <ChartToolbar activeChart={chartType} setActiveChart={setChartType} />
         </div>
 
         {/* Custom Title */}
         <div>
-          <label className="text-sm font-medium block text-gray-700 mb-2">
+          <label className="text-sm font-medium block text-secondary-text-dark mb-2">
             Chart Title (Optional)
           </label>
           <input
@@ -155,20 +155,20 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
             value={customTitle}
             onChange={(e) => setCustomTitle(e.target.value)}
             placeholder="Enter custom title..."
-            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
+            className="w-full p-2 border border-border bg-secondary-color-lt rounded-md focus:outline-none text-secondary-text-dark"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-secondary-text-dark mt-1">
             Leave empty for auto-generated title
           </p>
         </div>
 
         {/* Metric Selection */}
         <div>
-          <label className="text-sm font-medium block text-gray-700 mb-2">Metric</label>
+          <label className="text-sm font-medium bg-secondary-color-lt block text-secondary-text-dark mb-2">Metric</label>
           <select
             value={metric}
             onChange={e => setMetric(e.target.value as any)}
-            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
+            className="w-full p-2 border border-border bg-secondary-color-lt rounded-md focus:outline-none text-secondary-text-dark"
           >
             <option value="sales">Sales</option>
             <option value="revenue">Revenue</option>
@@ -179,15 +179,15 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
 
         {/* Filters */}
         <div>
-          <h3 className="text-sm font-medium text-gray-700 mb-3">Data Filters</h3>
+          <h3 className="text-sm font-medium text-secondary-text-dark mb-3">Data Filters</h3>
           <div className="space-y-3">
             {/* Date Range */}
             <div>
-              <label className="text-xs font-medium block text-gray-600 mb-1">Date Range</label>
+              <label className="text-xs font-medium block text-secondary-text-dark mb-1">Date Range</label>
               <select
                 value={dateRange}
                 onChange={e => setDateRange(e.target.value)}
-                className="w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
+                className="w-full p-2 text-sm border border-border bg-secondary-color-lt rounded-md focus:outline-none text-secondary-text-dark"
               >
                 <option value="all">All Time</option>
                 <option value="6m">Last 6 Months</option>
@@ -197,11 +197,11 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
 
             {/* Category Filter */}
             <div>
-              <label className="text-xs font-medium block text-gray-600 mb-1">Category</label>
+              <label className="text-xs font-medium block text-secondary-text-dark mb-1">Category</label>
               <select
                 value={categoryFilter}
                 onChange={e => setCategoryFilter(e.target.value)}
-                className="w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
+                className="w-full p-2 text-sm border border-border bg-secondary-color-lt rounded-md focus:outline-none text-secondary-text-dark"
               >
                 <option value="all">All Categories</option>
                 {categories.map(cat => (
@@ -212,11 +212,11 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
 
             {/* Region Filter */}
             <div>
-              <label className="text-xs font-medium block text-gray-600 mb-1">Region</label>
+              <label className="text-xs font-medium block text-secondary-text-dark mb-1">Region</label>
               <select
                 value={regionFilter}
                 onChange={e => setRegionFilter(e.target.value)}
-                className="w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
+                className="w-full p-2 text-sm border border-border bg-secondary-color-lt rounded-md focus:outline-none text-secondary-text-dark"
               >
                 <option value="all">All Regions</option>
                 {regions.map(region => (
@@ -228,9 +228,9 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
         </div>
 
         {/* Data Preview */}
-        <div className="bg-gray-50 p-3 rounded-md">
-          <h4 className="text-xs font-medium text-gray-700 mb-2">Data Preview</h4>
-          <div className="text-xs text-gray-600 space-y-1">
+        <div className="bg-secondary-color-lt border border-border p-3 rounded-md">
+          <h4 className="text-xs font-medium text-secondary-text-dark mb-2">Data Preview</h4>
+          <div className="text-xs text-secondary-text-dark space-y-1">
             <p>• Records: {filteredData.length}</p>
             <p>• Metric: {metric.charAt(0).toUpperCase() + metric.slice(1)}</p>
             <p>• Chart: {chartType.charAt(0).toUpperCase() + chartType.slice(1)}</p>
@@ -242,11 +242,11 @@ const ChartBuilderPanel: React.FC<ChartBuilderPanelProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
+      <div className="p-4 border-t border-primary bg-secondary-color-lt">
         <div className="flex gap-2">
           <button
             onClick={handleClose}
-            className="flex-1 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            className="flex-1 px-4 py-2 text-primary bg-secondary-color-lt border border-primary rounded-md hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>

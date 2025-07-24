@@ -221,10 +221,10 @@ const DueWarnings: React.FC<DueWarningsProps> = ({
   };
 
   return (
-    <div className="w-full border-2 border-red-200 rounded-xl p-4 bg-white h-[400px] flex flex-col">
+    <div className="w-full border-2 border-border rounded-xl p-4 bg-secondary-color-lt h-[400px] flex flex-col">
       <div className="mb-4 flex-shrink-0">
-        <h2 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
-          <AlertTriangle className="text-orange-600 h-5 w-5" />
+        <h2 className="text-xl font-bold text-secondary-text mb-2 flex items-center gap-2">
+          <AlertTriangle className="text-red-color h-5 w-5" />
           Financial Risk Dashboard
         </h2>
       </div>
@@ -239,7 +239,7 @@ const DueWarnings: React.FC<DueWarningsProps> = ({
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                 filterType === type
                   ? 'bg-primary text-white'
-                  : 'bg-primary-xl text-gray-700 hover:bg-primary-lg border border-primary-lg'
+                  : 'bg-primary-xl text-secondary-text hover:bg-primary-lg border border-primary-lg'
               }`}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -251,7 +251,7 @@ const DueWarnings: React.FC<DueWarningsProps> = ({
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as 'severity' | 'date')}
-          className="px-2 py-1 border border-primary-lg focus:outline-none rounded-md text-xs"
+          className="px-2 bg-secondary-color-lt text-secondary-text py-1 border border-primary-lg focus:outline-none rounded-md text-xs"
         >
           <option value="severity">Sort by Severity</option>
           <option value="date">Sort by Title</option>
@@ -259,7 +259,7 @@ const DueWarnings: React.FC<DueWarningsProps> = ({
       </div>
 
       {/* Warnings List - Scrollable */}
-      <div className="flex-1 overflow-y-auto space-y-3 pr-2">
+      <div className="flex-1 overflow-y-auto space-y-1 pr-2">
         {filteredWarnings.length === 0 ? (
           <div className="text-center py-8 bg-green-50 border border-green-200 rounded-lg">
             <AlertCircle className="mx-auto h-10 w-10 text-green-600 mb-3" />
@@ -326,7 +326,7 @@ const DueWarnings: React.FC<DueWarningsProps> = ({
       {/* Footer */}
       {filteredWarnings.length > 0 && (
         <div className="mt-4 p-3 bg-primary-xl border border-primary-lg rounded-lg flex-shrink-0">
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-secondary-text-dark">
             <strong>Note:</strong> These alerts are generated based on your financial data. 
             Click the × to ignore warnings you've addressed.
           </p>
