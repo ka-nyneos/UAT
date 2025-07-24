@@ -1,22 +1,59 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../common/Layout";
 import axios from "axios";
+import Layout from "../common/Layout";
 
+type CardData = {
+  title: string;
+  subtitle?: string;
+  value: string;
+  description: string;
+};
 
-// const [currencyData, setCurrencyData] = useState<
-//   { currency: string; value: number; color: string }[]
-// >([]);
-// const [loading, setLoading] = useState(true);
-// const [error, setError] = useState("");
+type GridCardItem = {
+  label: string;
+  value: string;
+  subvalue?: string;
+};
 
-const TreasuryCards = () => {
-  const [unhedgedData, setUnhedgedData] = useState<number | null>(null);
+type GridCardData = {
+  title: string;
+  items: GridCardItem[];
+};
 
-  const cardData1 = [
+type CurrencyPosition = {
+  currency: string;
+  value: number;
+  color: string;
+};
+
+type MaturitySummaryItem = {
+  label: string;
+  value: string;
+};
+
+const TreasuryDashboard: React.FC = () => {
+  const [unhedgedValue, setUnhedgedValue] = useState<number | null>(null);
+  const [maturityExpiryCount, setMaturityExpiryCount] = useState<number | null>(
+    null
+  );
+  const [maturitySummary, setMaturitySummary] = useState<MaturitySummaryItem[]>(
+    []
+  );
+  const [currencyPositions, setCurrencyPositions] = useState<
+    CurrencyPosition[]
+  >([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Static card data
+  const primaryCards: CardData[] = [
     {
       title: "Exposures Requiring Attention",
       subtitle: "(Next 7 Days)",
-      value: "5",
+      value:
+        maturityExpiryCount !== null
+          ? maturityExpiryCount.toString()
+          : "Loading...",
       description: "Unhedged & Approaching Maturity",
     },
     {
@@ -25,10 +62,11 @@ const TreasuryCards = () => {
       description: "Trades Maturing Today",
     },
     {
-  title: "Overall Unhedged Value",
-  value: unhedgedData !== null ? `$${unhedgedData.toFixed(2)}M` : "Loading...",
-  description: "Potential Spot Exposure",
-},
+      title: "Overall Unhedged Value",
+      value:
+        unhedgedValue !== null ? `$${unhedgedValue.toFixed(2)}M` : "Loading...",
+      description: "Potential Spot Exposure",
+    },
     {
       title: "Pending Settlements",
       subtitle: "(Today)",
@@ -47,14 +85,33 @@ const TreasuryCards = () => {
     },
   ];
 
-  const cardData2 = [
+  const gridCards: GridCardData[] = [
     {
       title: "Upcoming Exposure Maturities",
-      items: [
-        { label: "Next 7 Days", value: "$18.5M", subvalue: "(3 Unhedged)" },
-        { label: "Next 30 Days", value: "$45.0M", subvalue: "(5 Unhedged)" },
-        { label: "Total Upcoming", value: "$63.5M" },
-      ],
+      items:
+        maturitySummary.length > 0
+          ? maturitySummary.map((item) => ({
+              label: item.label,
+              value: item.value,
+              subvalue: item.label.includes("7 Days")
+                ? "(3 Unhedged)"
+                : item.label.includes("30 Days")
+                ? "(5 Unhedged)"
+                : undefined,
+            }))
+          : [
+              {
+                label: "Next 7 Days",
+                value: "Loading...",
+                subvalue: "(3 Unhedged)",
+              },
+              {
+                label: "Next 30 Days",
+                value: "Loading...",
+                subvalue: "(5 Unhedged)",
+              },
+              { label: "Total Upcoming", value: "Loading..." },
+            ],
     },
     {
       title: "Trades Maturing Soon",
@@ -83,173 +140,194 @@ const TreasuryCards = () => {
     },
   ];
 
-  const [currencyData, setCurrencyData] = useState<
-    { currency: string; value: number; color: string }[]
-  >([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  // const [unhedgedData, setUnhedgedData] = useState<number | null>(null);
-
-
+  // Data fetching
   useEffect(() => {
-  const fetchCurrencyData = async () => {
-    try {
-      const response = await axios.get(
-        "https://backend-5n7t.onrender.com/api/exposureUpload/top-currencies"
-      );
-      const mapped = response.data.map((item) => ({
-        currency: item.currency,
-        value: item.value / 10000, // Convert to millions
-        color: item.value >= 0 ? "bg-green-500" : "bg-red-500",
-      }));
-      setCurrencyData(mapped);
-    } catch (err) {
-      setError("Failed to load currency data.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const fetchData = async () => {
+      try {
+        const [
+          positionsResponse,
+          unhedgedResponse,
+          expiryResponse,
+          summaryResponse,
+        ] = await Promise.all([
+          axios.get(
+            "https://backend-5n7t.onrender.com/api/exposureUpload/top-currencies"
+          ),
+          axios.get(
+            "https://backend-5n7t.onrender.com/api/exposureUpload/USDsum"
+          ),
+          axios.get(
+            "https://backend-5n7t.onrender.com/api/exposureUpload/matexpirycount7days"
+          ),
+          axios.get(
+            "https://backend-5n7t.onrender.com/api/exposureUpload/matexpirysummary"
+          ),
+        ]);
 
-  const fetchUnhedgedData = async () => {
-    try {
-      const response = await axios.get(
-        "https://backend-5n7t.onrender.com/api/exposureUpload/USDsum"
-      );
-      let usdValue = response.data.totalUsd;
-      usdValue = usdValue / 1000000;
-      usdValue= usdValue-1.2301 // Convert to millions
-      setUnhedgedData(usdValue);
-    } catch (err) {
-      // setError("Failed to load unhedged data.");
-      console.error(err);
-    }
-  };
+        // Process currency positions
+        const colorMap: Record<string, string> = {
+          "bg-green-400": "bg-green-400",
+          "bg-blue-400": "bg-blue-400",
+          "bg-yellow-400": "bg-yellow-400",
+          "bg-red-400": "bg-red-400",
+          "bg-purple-400": "bg-purple-400",
+          "bg-orange-400": "bg-orange-400",
+          "bg-teal-400": "bg-teal-400",
+          "bg-pink-400": "bg-pink-400",
+          "bg-indigo-400": "bg-indigo-400",
+        };
 
-  fetchCurrencyData();
-  fetchUnhedgedData(); // ⬅ Call this too
-}, []);
+        const mappedPositions = positionsResponse.data.map((item: any) => ({
+          currency: item.currency,
+          value: item.value / 10000, // Convert to millions
+          color: colorMap[item.color] || "bg-gray-400",
+        }));
 
+        // Process unhedged value
+        let usdValue = unhedgedResponse.data.totalUsd / 1000000;
+        usdValue = usdValue - 1.2301;
+
+        setCurrencyPositions(mappedPositions);
+        setUnhedgedValue(usdValue);
+        setMaturityExpiryCount(expiryResponse.data.value);
+        setMaturitySummary(summaryResponse.data);
+      } catch (err) {
+        setError("Failed to load dashboard data");
+        console.error("Dashboard data fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Helper functions
   const formatToMillions = (value: number): string => {
     return `${value >= 0 ? "+" : ""}${Math.abs(value).toFixed(1)}M`;
   };
 
-  // Calculate maximum absolute value for normalization
-  const maxValue = Math.max(
-    ...currencyData.map((item) => Math.abs(item.value)),
-    1 // Ensure we don't divide by zero
+  const calculateMaxValue = (positions: CurrencyPosition[]): number => {
+    return Math.max(...positions.map((item) => Math.abs(item.value)), 1);
+  };
+
+  // Component rendering
+  const renderPrimaryCard = (card: CardData) => (
+    <div
+      key={card.title}
+      className="bg-secondary-color rounded-lg p-6 border border-primary-lt z-10 shadow-lg transition-transform hover:scale-[1.02] hover:shadow-lg"
+    >
+      <div className="flex flex-col space-y-2">
+        <h2 className="text-lg mx-auto font-semibold text-secondary-text-dark underline  underline-offset-4">
+          {card.title}
+          {card.subtitle && (
+            <span className="text-sm text-primary-lt ml-1">
+              {card.subtitle}
+            </span>
+          )}
+        </h2>
+        <div className="flex items-end justify-center pt-4 space-x-2">
+          <p className="text-4xl font-bold text-primary">{card.value}</p>
+          <p className="text-sm text-secondary-text">{card.description}</p>
+        </div>
+      </div>
+    </div>
   );
 
-  return (
-    <>
-      {/* Section 1: Primary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {cardData1.map((card, index) => (
-          <div
-            key={`card1-${index}`}
-            className="bg-white rounded-lg shadow-md p-6 border border-gray-200 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg"
-          >
-            <div className="flex flex-col space-y-2">
-              <h2 className="text-lg mx-auto font-semibold text-gray-700 underline underline-offset-4">
-                {card.title}
-                {card.subtitle && (
-                  <span className="text-sm text-gray-500 ml-1">
-                    {card.subtitle}
-                  </span>
-                )}
-              </h2>
-              <div className="flex items-end justify-center pt-4 space-x-2">
-                <p className="text-4xl font-bold text-primary">{card.value}</p>
-                <p className="text-sm text-gray-500">{card.description}</p>
-              </div>
+  const renderGridCard = (card: GridCardData) => (
+    <div
+      key={card.title}
+      className="bg-secondary-color rounded-lg z-10 shadow-md p-6 border border-primary-lt transition-transform hover:scale-[1.02] hover:shadow-lg"
+    >
+      <h2 className="text-lg font-semibold text-secondary-text-dark pb-2 border-b border-primary-lt mb-4">
+        {card.title}
+      </h2>
+      <div className="space-y-3">
+        {card.items.map((item) => (
+          <div key={item.label} className="flex justify-between items-center">
+            <span className="text-sm text-secondary-text">{item.label}</span>
+            <div className="text-right">
+              <span className="font-medium text-primary">{item.value}</span>
+              {item.subvalue && (
+                <span className="text-xs text-primary-lt ml-1">
+                  {item.subvalue}
+                </span>
+              )}
             </div>
           </div>
         ))}
       </div>
-
-      {/* Section 2: Grid Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {cardData2.map((card, index) => (
-          <div
-            key={`card2-${index}`}
-            className="bg-white rounded-lg shadow-md p-6 border border-gray-200 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg"
-          >
-            <h2 className="text-lg font-semibold text-gray-700 pb-2 border-b mb-4">
-              {card.title}
-            </h2>
-            <div className="space-y-3">
-              {card.items.map((item, i) => (
-                <div key={i} className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">{item.label}</span>
-                  <div className="text-right">
-                    <span className="font-medium text-gray-800">
-                      {item.value}
-                    </span>
-                    {item.subvalue && (
-                      <span className="text-xs text-gray-500 ml-1">
-                        {item.subvalue}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-     {/* Section 3: Compact Currency Net Positions */}
-<div className="mt-6 w-1/2">
-  <div className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
-    <h2 className="text-lg font-semibold text-gray-800 mb-4">
-      Top {currencyData.length} Currency Net Positions (in millions)
-    </h2>
-
-    {loading ? (
-      <p className="text-center text-gray-500 py-2">Loading...</p>
-    ) : error ? (
-      <p className="text-center text-red-500 py-2">{error}</p>
-    ) : (
-      <div className="flex items-end justify-center gap-4 h-24 px-4">
-        {currencyData.map((item, index) => {
-          const heightPercentage = (Math.abs(item.value) / maxValue) * 70; // Adjusted to reduce bar height
-          return (
-            <div key={index} className="flex flex-col items-center w-12">
-              <div
-                className={`w-6 ${item.color} rounded-t-sm transition-all duration-300`}
-                style={{ height: `${heightPercentage}px` }}
-              ></div>
-              <div className="mt-1 text-xs font-medium text-gray-700 truncate w-full text-center">
-                {item.currency}
-              </div>
-              <div
-                className={`text-[10px] mt-1 font-medium ${
-                  item.value >= 0 ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {formatToMillions(item.value)}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    )}
-  </div>
-</div>
-
-      {/* </div> */}
-    </>
+    </div>
   );
-};
 
-const OPSDashboard = () => {
+  const renderCurrencyPosition = (
+    position: CurrencyPosition,
+    maxValue: number
+  ) => {
+    const heightPercentage = (Math.abs(position.value) / maxValue) * 70;
+
+    return (
+      <div key={position.currency} className="flex flex-col items-center w-12">
+        <div
+          className={`w-6 ${position.color} rounded-t-sm transition-all duration-300`}
+          style={{ height: `${heightPercentage}px` }}
+        />
+        <div className="mt-1 text-xs font-medium text-secondary-text truncate w-full text-center">
+          {position.currency}
+        </div>
+        <div
+          className={`text-[10px] mt-1 font-medium ${
+            position.value >= 0 ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {formatToMillions(position.value)}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Layout title="Operations Dashboard">
-      <div className="p-6 bg-gray-50 min-h-screen">
-        <TreasuryCards />
+      <div className="p-6 bg-secondary-color-lt shadow-sm border border-primary rounded-xl min-h-screen">
+        {/* Primary Cards Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {primaryCards.map(renderPrimaryCard)}
+        </div>
+
+        {/* Grid Cards Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {gridCards.map(renderGridCard)}
+        </div>
+
+        {/* Currency Positions Section */}
+        <div className="mt-6 grid grid-cols-2 gap-6">
+          <div className="bg-secondary-color hover:scale-[1.02] hover:shadow-lg transition-transform rounded-lg shadow-md p-4 border border-primary-lt ">
+            <h2 className="text-lg font-semibold text-secondary-text-dark mb-4">
+              Top {currencyPositions.length} Currency Net Positions (in
+              millions)
+            </h2>
+
+            {loading ? (
+              <p className="text-center text-secondary-text-dark py-2">
+                Loading...
+              </p>
+            ) : error ? (
+              <p className="text-center text-red-500 py-2">{error}</p>
+            ) : (
+              <div className="flex items-end justify-center gap-4 h-24 px-4">
+                {currencyPositions.map((position) =>
+                  renderCurrencyPosition(
+                    position,
+                    calculateMaxValue(currencyPositions)
+                  )
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </Layout>
   );
 };
 
-export default OPSDashboard;
+export default TreasuryDashboard;
