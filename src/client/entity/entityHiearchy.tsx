@@ -483,9 +483,9 @@ const HierarchicalTree = () => {
     // };
 
     return (
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-secondary-color-lt rounded-lg border border-border p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">{node.name} Details</h2>
+          <h2 className="text-xl text-secondary-text-dark font-bold">{node.name} Details</h2>
           {/* <button
             className="px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm"
             onClick={() => setEditing((prev) => !prev)}
@@ -509,108 +509,108 @@ const HierarchicalTree = () => {
               <>
                 <div className="space-y-3">
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Company Name
                     </label>
                     <input
                       name="entity_name"
                       value={formData.entity_name}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Address
                     </label>
                     <input
                       name="address"
                       value={formData.address || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Contact Number
                     </label>
                     <input
                       name="contact_phone"
                       value={formData.contact_phone || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Contact Email
                     </label>
                     <input
                       name="contact_email"
                       value={formData.contact_email || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Registration Number
                     </label>
                     <input
                       name="registration_number"
                       value={formData.registration_number || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       PAN/GST
                     </label>
                     <input
                       name="pan_gst"
                       value={formData.pan_gst || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Legal Entity Identifier
                     </label>
                     <input
                       name="legal_entity_identifier"
                       value={formData.legal_entity_identifier || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Tax Identification Number
                     </label>
                     <input
                       name="tax_identification_number"
                       value={formData.tax_identification_number || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Default Currency
                     </label>
                     <input
                       name="default_currency"
                       value={formData.default_currency || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-primary-lt">
                       Business Units
                     </label>
                     {/* <input
@@ -628,126 +628,126 @@ const HierarchicalTree = () => {
               <>
                 <div className="space-y-3">
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Entity Name
                     </label>
                     <input
                       name="entity_name"
                       value={formData.entity_name}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Parent
                     </label>
                     <input
                       name="parentname"
                       value={formData.parentname || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Address
                     </label>
                     <input
                       name="address"
                       value={formData.address || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Contact Number
                     </label>
                     <input
                       name="contact_phone"
                       value={formData.contact_phone || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Contact Email
                     </label>
                     <input
                       name="contact_email"
                       value={formData.contact_email || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Unique Identifier
                     </label>
                     <input
                       name="unique_identifier"
                       value={formData.unique_identifier || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Legal Entity Type
                     </label>
                     <input
                       name="legal_entity_type"
                       value={formData.legal_entity_type || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Reporting Currency
                     </label>
                     <input
                       name="reporting_currency"
                       value={formData.reporting_currency || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       FX Authority
                     </label>
                     <input
                       name="fx_trading_authority"
                       value={formData.fx_trading_authority || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       FX Limit
                     </label>
                     <input
                       name="internal_fx_trading_limit"
                       value={formData.internal_fx_trading_limit || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                   <div>
-                    <label className="font-semibold text-gray-500">
+                    <label className="font-semibold text-gray-500 text-primary-lt">
                       Treasury Contact
                     </label>
                     <input
                       name="associated_treasury_contact"
                       value={formData.associated_treasury_contact || ""}
                       onChange={handleChange}
-                      className="w-full border rounded px-2 py-1"
+                      className="w-full border rounded px-2 py-1 bg-secondary-color-lt border-border text-secondary-text-dark"
                     />
                   </div>
                 </div>
@@ -769,56 +769,56 @@ const HierarchicalTree = () => {
               <>
                 <div className="space-y-3">
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Company Name
                     </h3>
-                    <p>{node.data.entity_name}</p>
+                    <p className="text-secondary-text-dark">{node.data.entity_name}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">Address</h3>
-                    <p>{node.data.address}</p>
+                    <h3 className="font-semibold text-primary-lt">Address</h3>
+                    <p className="text-secondary-text-dark">{node.data.address}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Contact Number
                     </h3>
-                    <p>{node.data.contact_phone}</p>
+                    <p className="text-secondary-text-dark">{node.data.contact_phone}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Contact Email
                     </h3>
-                    <p>{node.data.contact_email}</p>
+                    <p className="text-secondary-text-dark">{node.data.contact_email}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Registration Number
                     </h3>
-                    <p>{node.data.registration_number}</p>
+                    <p className="text-secondary-text-dark">{node.data.registration_number}</p>
                   </div>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <h3 className="font-semibold text-gray-500">PAN/GST</h3>
-                    <p>{node.data.pan_gst}</p>
+                    <h3 className="font-semibold text-primary-lt">PAN/GST</h3>
+                    <p className="text-secondary-text-dark">{node.data.pan_gst}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Legal Entity Identifier
                     </h3>
-                    <p>{node.data.legal_entity_identifier}</p>
+                    <p className="text-secondary-text-dark">{node.data.legal_entity_identifier}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Tax Identification Number
                     </h3>
-                    <p>{node.data.tax_identification_number}</p>
+                    <p className="text-secondary-text-dark">{node.data.tax_identification_number}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Default Currency
                     </h3>
-                    <p>{node.data.default_currency}</p>
+                    <p className="text-secondary-text-dark">{node.data.default_currency}</p>
                   </div>
                   <div>
                     {/* <h3 className="font-semibold text-gray-500">Business Units</h3>
@@ -830,64 +830,64 @@ const HierarchicalTree = () => {
               <>
                 <div className="space-y-3">
                   <div>
-                    <h3 className="font-semibold text-gray-500">Entity Name</h3>
-                    <p>{node.data.entity_name}</p>
+                    <h3 className="font-semibold text-primary-lt">Entity Name</h3>
+                    <p className="text-secondary-text-dark">{node.data.entity_name}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">Parent</h3>
-                    <p>{node.data.parentname}</p>
+                    <h3 className="font-semibold text-primary-lt">Parent</h3>
+                    <p className="text-secondary-text-dark">{node.data.parentname}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">Address</h3>
-                    <p>{node.data.address}</p>
+                    <h3 className="font-semibold text-primary-lt">Address</h3>
+                    <p className="text-secondary-text-dark">{node.data.address}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Contact Number
                     </h3>
-                    <p>{node.data.contact_phone}</p>
+                    <p className="text-secondary-text-dark">{node.data.contact_phone}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Contact Email
                     </h3>
-                    <p>{node.data.contact_email}</p>
+                    <p className="text-secondary-text-dark">{node.data.contact_email}</p>
                   </div>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Unique Identifier
                     </h3>
-                    <p>{node.data.unique_identifier}</p>
+                    <p className="text-secondary-text-dark">{node.data.unique_identifier}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Legal Entity Type
                     </h3>
-                    <p>{node.data.legal_entity_type}</p>
+                    <p className="text-secondary-text-dark">{node.data.legal_entity_type}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Reporting Currency
                     </h3>
-                    <p>{node.data.reporting_currency}</p>
+                    <p className="text-secondary-text-dark">{node.data.reporting_currency}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       FX Authority
                     </h3>
-                    <p>{node.data.fx_trading_authority}</p>
+                    <p className="text-secondary-text-dark">{node.data.fx_trading_authority}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">FX Limit</h3>
-                    <p>{node.data.internal_fx_trading_limit}</p>
+                    <h3 className="font-semibold text-primary-lt">FX Limit</h3>
+                    <p className="text-secondary-text-dark">{node.data.internal_fx_trading_limit}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-500">
+                    <h3 className="font-semibold text-primary-lt">
                       Treasury Contact
                     </h3>
-                    <p>{node.data.associated_treasury_contact}</p>
+                    <p className="text-secondary-text-dark">{node.data.associated_treasury_contact}</p>
                   </div>
                 </div>
               </>
@@ -1003,6 +1003,16 @@ const HierarchicalTree = () => {
     const Icon = config.icon;
     const status = node.data.approval_status;
 
+    // Define line colors for hierarchy levels
+    const lineColors = [
+      "border-l-blue-600",
+      "border-l-green-600", 
+      "border-l-yellow-600",
+      "border-l-purple-600",
+      // "border-l-pink-600",
+      // "border-l-indigo-600"
+    ];
+
     return (
       <div className="relative">
         <div
@@ -1099,7 +1109,16 @@ const HierarchicalTree = () => {
         </div>
 
         {hasChildren && isExpanded && (
-          <div className="ml-8 pl-6">
+          <div 
+            className={`pl-6 mt-4 border-l-2 ${lineColors[level % lineColors.length]} border-dashed relative`}
+            style={{ 
+              marginLeft: level * 10 + 16, 
+              minHeight: 40,
+              position: 'relative' 
+            }}
+          >
+            {/* Animated vertical line gradient */}
+            <div className="absolute left-0 top-0 h-full w-1 opacity-30" />
             {node.children.map((child) => (
               <TreeNode key={child.id} node={child} level={level + 1} />
             ))}
@@ -1131,20 +1150,20 @@ const HierarchicalTree = () => {
           <LoadingSpinner />
         </div>
       ) : (
-        <div className="p-6 bg-gray-50 min-h-screen">
+        <div className="p-6 bg-secondary-color-lt rounded-lg border-border border mb-4">
           <div className="w-full">
             <div className="flex space-x-4 w-full">
               {/* Left panel (tree view) */}
-              <div className="bg-white w-full mt-6 rounded-lg border border-gray-200 p-6">
-                <div className="flex justify-between items-center mt-6 border-b mb-8 pb-2">
-                  <h2 className="text-xl font-semibold">Hierarchy Tree</h2>
+              <div className="bg-secondary-color w-full mt-6 mb-2 rounded-lg border border-border p-6">
+                <div className="flex justify-between items-center mt-6 border-border border-b mb-8 pb-2">
+                  <h2 className="text-xl text-secondary-text-dark font-semibold">Hierarchy Tree</h2>
                   <div className="flex items-center gap-2 w-[7rem] justify-end">
                     <Button
-                      categories="Medium"
+                      categories="Large"
                       onClick={toggleAllNodes}
                       // className="px-2 py-1 text-[12px] bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                     >
-                      {isAllExpanded ? "Collapse All" : "Expand All"}
+                      {isAllExpanded ? "Collapse" : "Expand"}
                     </Button>
                   </div>
                 </div>
@@ -1160,12 +1179,12 @@ const HierarchicalTree = () => {
               </div>
 
               {/* Right panel (details and actions) */}
-              <div className="flex flex-col bg-white mt-6 w-full space-y-10 rounded-lg border border-gray-200 p-6">
+              <div className="flex flex-col bg-secondary-color mt-6 w-full mb-2 space-y-10 rounded-lg border border-border p-6">
                 {selectedNode ? (
                   <>
-                    <div className="bg-white mt-6 w-full rounded-lg border border-gray-200 p-6">
-                      <h3 className="font-semibold text-gray-700">
-                        Current Node: {selectedNode.id}
+                    <div className="bg-secondary-color-lt mt-6 w-full rounded-lg border border-border p-6">
+                      <h3 className="font-semibold text-secondary-text-dark">
+                        Current Node : <span className="text-primary">{selectedNode.id}</span>
                       </h3>
                       <div className="flex justify-end gap-2 ml-10 mt-4">
                         {Visibility.approve && (
@@ -1195,21 +1214,21 @@ const HierarchicalTree = () => {
                         )}
                       </div>
                       <div className="mb-3">
-                        <label className="block font-semibold mb-1">
-                          Description <span className="text-red-500">*</span>
+                        <label className="block text-secondary-text-dark font-semibold mb-1">
+                          Description <span className="text-red-color">*</span>
                         </label>
 
                         <textarea
                           name="description"
                           value={approvalComment}
                           onChange={(e) => setApprovalComment(e.target.value)}
-                          className="w-full text-black bg-white px-3 py-2 border border-border rounded-lg shadow-sm focus:outline-none"
+                          className="w-full text-secondary-text-dark bg-secondary-color-lt px-3 py-2 border border-border rounded-lg shadow-sm focus:outline-none"
                         />
                       </div>
                       <div className="flex justify-between items-center mt-4">
                         <div>
-                          <p className="text-sm text-gray-600">
-                            Parent: {selectedNode.data.parentname || "None"}
+                          <p className="text-sm text-secondary-text-dark">
+                            Parent : <span className="text-primary font-semibold">{selectedNode.data.parentname || "None"}</span>
                           </p>
                         </div>
                       </div>
@@ -1228,7 +1247,7 @@ const HierarchicalTree = () => {
                     />
                   </>
                 ) : (
-                  <div className="text-center py-8 text-gray-500">
+                  <div className="text-center py-8 text-secondary-text-dark">
                     Select a node to view details
                   </div>
                 )}
