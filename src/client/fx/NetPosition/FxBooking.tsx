@@ -101,7 +101,7 @@ const FXForwardBookingForm: React.FC = () => {
                         return (
                           <tr
                             key={idx}
-                            className={`${isNegative ? "bg-red-50" : ""} ${
+                            className={`${isNegative ? "text-primary" : ""} ${
                               isDifferenceRow
                                 ? "border-t-2 border-gray-300"
                                 : ""
@@ -110,7 +110,7 @@ const FXForwardBookingForm: React.FC = () => {
                             <td
                               className={`px-4 py-3 ${
                                 isDifferenceRow
-                                  ? "text-gray-700 font-semibold"
+                                  ? "text-primary font-semibold"
                                   : "text-secondary-text-dark"
                               }`}
                             >
@@ -119,9 +119,9 @@ const FXForwardBookingForm: React.FC = () => {
                             <td
                               className={`px-4 py-3 text-right ${
                                 isNegative
-                                  ? "text-red-600 font-bold"
+                                  ? "text-red-color font-bold"
                                   : isDifferenceRow
-                                  ? "text-blue-600 font-bold"
+                                  ? "text-primary font-bold"
                                   : "text-secondary-text-dark"
                               }`}
                             >
